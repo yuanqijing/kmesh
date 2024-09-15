@@ -8,6 +8,7 @@ function get_go_test_command() {
     if [ -z "$TEST_PKG" ]; then
         TEST_PKG="./pkg/..."
     fi
+    TEST_PKG="./pkg/status/..."
 
     if [ -z "$TEST_TARGET" ]; then
         echo "go test -v -race -vet=off $TEST_PKG"
