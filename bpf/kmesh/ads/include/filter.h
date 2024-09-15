@@ -4,6 +4,7 @@
 #ifndef __KMESH_FILTER_H__
 #define __KMESH_FILTER_H__
 
+#include "local_ratelimit.h"
 #include "tcp_proxy.h"
 #include "tail_call.h"
 #include "bpf_log.h"
@@ -181,6 +182,10 @@ int filter_chain_manager(ctx_buff_t *ctx)
     if (filter_chain == NULL) {
         return KMESH_TAIL_CALL_RET(-1);
     }
+
+    /* ratelimit check */
+    Local_rate_limit__check_and_take(filter_chain, &addr, ctx);
+
     /* filter match */
     ret = filter_chain_filter_match(filter_chain, &addr, ctx, &filter, &filter_idx);
     if (ret != 0) {
