@@ -20,7 +20,7 @@ function set_enhanced_kernel_env() {
     # When using an online compiled image, /usr/include/linux/bpf.h in host 
     # machine  will be mounted to config/linux-bpf.h. 
     # Otherwise, /usr/include/linux/bpf.h from the current compilation 
-    # environment will be obtained
+    # environment will be obtained.
     export KERNEL_HEADER_LINUX_BPF=$ROOT_DIR/config/linux-bpf.h
     if [ ! -f "$KERNEL_HEADER_LINUX_BPF" ]; then
 	    export KERNEL_HEADER_LINUX_BPF=/usr/include/linux/bpf.h
